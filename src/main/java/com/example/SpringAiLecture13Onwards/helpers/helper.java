@@ -2,6 +2,8 @@ package com.example.SpringAiLecture13Onwards.helpers;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+@Component
 public class helper {
 
 	public List<String> getData(){

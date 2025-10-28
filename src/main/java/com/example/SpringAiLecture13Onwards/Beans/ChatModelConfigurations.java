@@ -15,10 +15,13 @@ import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.chat.memory.repository.jdbc.JdbcChatMemoryRepository;
 import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.ai.ollama.api.OllamaOptions;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.example.SpringAiLecture13Onwards.Service.ChatService;
 import com.example.SpringAiLecture13Onwards.advisors.TokenPrintAdvisor;
+import com.example.SpringAiLecture13Onwards.helpers.helper;
 
 
 
@@ -36,7 +39,14 @@ public class ChatModelConfigurations {
 				.build();
 		
 	}
-	
+	 @Bean
+	    CommandLineRunner loadVectorData(ChatService chatService, helper help1) {
+	        return args -> {
+	            System.out.println("🌟 Loading data into VectorStore...");
+	            chatService.saveData(help1.getData());
+	            System.out.println("✅ Data successfully saved into vector_store!");
+	        };
+	    }
 	@Bean
 	public ChatClient chatClient(ChatClient.Builder builder, ChatMemory chatMemory) {
 		 //chat memory implementation
